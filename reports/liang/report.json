@@ -1,0 +1,1557 @@
+{
+  "aicl_version": "0.1.0",
+  "generated": "2026-10-25",
+  "seed": 0,
+  "target_fpr": 0.05,
+  "counts": {
+    "documents": 746,
+    "human": 394,
+    "machine": 352,
+    "calibration_humans": 196
+  },
+  "groups": {
+    "TOEFL essays (non-native writers)": {
+      "label": 0,
+      "n": 91
+    },
+    "US 8th-grade essays": {
+      "label": 0,
+      "n": 88
+    },
+    "US college admission essays": {
+      "label": 0,
+      "n": 70
+    },
+    "Stanford CS224N abstracts": {
+      "label": 0,
+      "n": 145
+    },
+    "GPT-3.5 college essays": {
+      "label": 1,
+      "n": 31
+    },
+    "GPT-3.5 CS224N abstracts": {
+      "label": 1,
+      "n": 145
+    },
+    "GPT-3.5 college essays, literary prompt": {
+      "label": 1,
+      "n": 31
+    },
+    "GPT-3.5 CS224N abstracts, literary prompt": {
+      "label": 1,
+      "n": 145
+    }
+  },
+  "detectors": {
+    "binoculars": {
+      "description": "Binoculars, gpt2/distilgpt2, uncalibrated",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.6806846877869606,
+      "auroc_ci95": [
+        0.6331640266299358,
+        0.7228965794306703
+      ],
+      "calibrated_threshold": -0.8578924530440238,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 10,
+          "rate": 0.21739130434782608,
+          "ci95": [
+            0.12260774618580751,
+            0.35573965839189464
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 2,
+          "rate": 0.045454545454545456,
+          "ci95": [
+            0.012554846366981079,
+            0.15135271525303162
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 2,
+          "rate": 0.05714285714285714,
+          "ci95": [
+            0.015812829614043955,
+            0.1860738073937003
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 1,
+          "rate": 0.0136986301369863,
+          "ci95": [
+            0.0024221890927605197,
+            0.0735991326912731
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 27,
+          "rate": 0.8709677419354839,
+          "ci95": [
+            0.7114724304561464,
+            0.9486579883535524
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 84,
+          "rate": 0.5793103448275863,
+          "ci95": [
+            0.4979264744012184,
+            0.6566002170613836
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 13,
+          "rate": 0.0896551724137931,
+          "ci95": [
+            0.05314302364985655,
+            0.1473493118262469
+          ]
+        }
+      }
+    },
+    "perplexity": {
+      "description": "Low perplexity under gpt2",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.7291810146923783,
+      "auroc_ci95": [
+        0.6823060146923783,
+        0.772928145087236
+      ],
+      "calibrated_threshold": -17.79950904646165,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 8,
+          "rate": 0.17391304347826086,
+          "ci95": [
+            0.09085683568889254,
+            0.3072363234392253
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 2,
+          "rate": 0.045454545454545456,
+          "ci95": [
+            0.012554846366981079,
+            0.15135271525303162
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 1,
+          "rate": 0.02857142857142857,
+          "ci95": [
+            0.005061361365853362,
+            0.1453340909327131
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.04999375338358389
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 31,
+          "rate": 1.0,
+          "ci95": [
+            0.889740999265246,
+            0.9999999999999999
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 59,
+          "rate": 0.4068965517241379,
+          "ci95": [
+            0.330340421565979,
+            0.4882586797605317
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 1,
+          "rate": 0.03225806451612903,
+          "ci95": [
+            0.00571707408694444,
+            0.16194457176169622
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 4,
+          "rate": 0.027586206896551724,
+          "ci95": [
+            0.010778728538865683,
+            0.06877967448824501
+          ]
+        }
+      }
+    },
+    "gltr-top10": {
+      "description": "GLTR top-10 rank share under gpt2",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.6614009412304866,
+      "auroc_ci95": [
+        0.6118069903581267,
+        0.7092946510560147
+      ],
+      "calibrated_threshold": 0.753968253968254,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 14,
+          "rate": 0.30434782608695654,
+          "ci95": [
+            0.19079670807448904,
+            0.4480591874023817
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 2,
+          "rate": 0.045454545454545456,
+          "ci95": [
+            0.012554846366981079,
+            0.15135271525303162
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 1,
+          "rate": 0.02857142857142857,
+          "ci95": [
+            0.005061361365853362,
+            0.1453340909327131
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.04999375338358389
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 31,
+          "rate": 1.0,
+          "ci95": [
+            0.889740999265246,
+            0.9999999999999999
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 46,
+          "rate": 0.31724137931034485,
+          "ci95": [
+            0.24704058770171988,
+            0.3968761667540236
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 1,
+          "rate": 0.03225806451612903,
+          "ci95": [
+            0.00571707408694444,
+            0.16194457176169622
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 1,
+          "rate": 0.006896551724137931,
+          "ci95": [
+            0.001218418511928561,
+            0.03802867369885121
+          ]
+        }
+      }
+    },
+    "stock-phrases": {
+      "description": "Stock-phrase density (baseline)",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.6960442493112947,
+      "auroc_ci95": [
+        0.6597939623507806,
+        0.7312184343434344
+      ],
+      "calibrated_threshold": 4.739336492890995,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.07707617732978073
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 1,
+          "rate": 0.02857142857142857,
+          "ci95": [
+            0.005061361365853362,
+            0.1453340909327131
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 10,
+          "rate": 0.136986301369863,
+          "ci95": [
+            0.07614307799620813,
+            0.23412635939187332
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 10,
+          "rate": 0.3225806451612903,
+          "ci95": [
+            0.18569230747313034,
+            0.49859314440049185
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 57,
+          "rate": 0.3931034482758621,
+          "ci95": [
+            0.31734377558655397,
+            0.47438111852906956
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 18,
+          "rate": 0.5806451612903226,
+          "ci95": [
+            0.40765964352020967,
+            0.7358469692645074
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 76,
+          "rate": 0.5241379310344828,
+          "ci95": [
+            0.4432787340193019,
+            0.6037511285997509
+          ]
+        }
+      }
+    },
+    "low-sentence-cv": {
+      "description": "Low sentence-length CV (baseline)",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.8562901744719926,
+      "auroc_ci95": [
+        0.8173065886134068,
+        0.890581955922865
+      ],
+      "calibrated_threshold": -0.20809385639692846,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 5,
+          "rate": 0.10869565217391304,
+          "ci95": [
+            0.04733076082742689,
+            0.23038103012631456
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.09890426758938868
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 6,
+          "rate": 0.0821917808219178,
+          "ci95": [
+            0.03821322997342026,
+            0.16794593381286216
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 4,
+          "rate": 0.12903225806451613,
+          "ci95": [
+            0.05134201164644764,
+            0.28852756954385356
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 70,
+          "rate": 0.4827586206896552,
+          "ci95": [
+            0.4029227213592587,
+            0.5634845196271321
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 3,
+          "rate": 0.0967741935483871,
+          "ci95": [
+            0.03346403609464399,
+            0.2490028999817704
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 65,
+          "rate": 0.4482758620689655,
+          "ci95": [
+            0.369703241810949,
+            0.5295184811482236
+          ]
+        }
+      }
+    },
+    "Crossplag (2023)": {
+      "description": "Third-party score",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.5976957070707071,
+      "auroc_ci95": [
+        0.5467171717171717,
+        0.644742883379247
+      ],
+      "calibrated_threshold": 0.9722716212272644,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 8,
+          "rate": 0.17391304347826086,
+          "ci95": [
+            0.09085683568889254,
+            0.3072363234392253
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.09890426758938868
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.04999375338358389
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 13,
+          "rate": 0.41935483870967744,
+          "ci95": [
+            0.26415303073549257,
+            0.5923403564797902
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 36,
+          "rate": 0.2482758620689655,
+          "ci95": [
+            0.18506448724327232,
+            0.32448123115803484
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 3,
+          "rate": 0.020689655172413793,
+          "ci95": [
+            0.007060784343230236,
+            0.05906051507843681
+          ]
+        }
+      },
+      "vendor_threshold": 0.5,
+      "vendor": {
+        "TOEFL essays (non-native writers)": {
+          "n": 91,
+          "flagged": 47,
+          "rate": 0.5164835164835165,
+          "ci95": [
+            0.41523851975365456,
+            0.6163931692941895
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 88,
+          "flagged": 11,
+          "rate": 0.125,
+          "ci95": [
+            0.07125200897954588,
+            0.21011939569981514
+          ]
+        },
+        "US college admission essays": {
+          "n": 70,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.05202487486728348
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 145,
+          "flagged": 5,
+          "rate": 0.034482758620689655,
+          "ci95": [
+            0.014817001068388777,
+            0.07817850556416554
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 18,
+          "rate": 0.5806451612903226,
+          "ci95": [
+            0.40765964352020967,
+            0.7358469692645074
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 53,
+          "rate": 0.36551724137931035,
+          "ci95": [
+            0.2915430622526851,
+            0.4464334174411638
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 13,
+          "rate": 0.0896551724137931,
+          "ci95": [
+            0.05314302364985655,
+            0.1473493118262469
+          ]
+        }
+      }
+    },
+    "GPTZero (2023)": {
+      "description": "Third-party score",
+      "scored": 740,
+      "skipped": 6,
+      "auroc": 0.7218385780885781,
+      "auroc_ci95": [
+        0.6671037296037297,
+        0.7722756410256411
+      ],
+      "calibrated_threshold": 0.7955141075657716,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 16,
+          "rate": 0.34782608695652173,
+          "ci95": [
+            0.22680806269918055,
+            0.49230207822727434
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 1,
+          "rate": 0.02857142857142857,
+          "ci95": [
+            0.005061361365853362,
+            0.1453340909327131
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 70,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.05202487486728348
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 31,
+          "rate": 1.0,
+          "ci95": [
+            0.889740999265246,
+            0.9999999999999999
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 9,
+          "rate": 0.06206896551724138,
+          "ci95": [
+            0.03299470764785982,
+            0.11374921340646905
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 3,
+          "rate": 0.0967741935483871,
+          "ci95": [
+            0.03346403609464399,
+            0.2490028999817704
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 1,
+          "rate": 0.006896551724137931,
+          "ci95": [
+            0.001218418511928561,
+            0.03802867369885121
+          ]
+        }
+      },
+      "vendor_threshold": 0.5,
+      "vendor": {
+        "TOEFL essays (non-native writers)": {
+          "n": 91,
+          "flagged": 47,
+          "rate": 0.5164835164835165,
+          "ci95": [
+            0.41523851975365456,
+            0.6163931692941895
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 88,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            3.469446951953614e-18,
+            0.04182853957248131
+          ]
+        },
+        "US college admission essays": {
+          "n": 70,
+          "flagged": 1,
+          "rate": 0.014285714285714285,
+          "ci95": [
+            0.0025261814032348645,
+            0.07658369703926908
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 139,
+          "flagged": 1,
+          "rate": 0.007194244604316547,
+          "ci95": [
+            0.0012710589909932825,
+            0.039624590455666506
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 31,
+          "rate": 1.0,
+          "ci95": [
+            0.889740999265246,
+            0.9999999999999999
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 20,
+          "rate": 0.13793103448275862,
+          "ci95": [
+            0.09109513404671896,
+            0.20345692666748996
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 4,
+          "rate": 0.12903225806451613,
+          "ci95": [
+            0.05134201164644764,
+            0.28852756954385356
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 1,
+          "rate": 0.006896551724137931,
+          "ci95": [
+            0.001218418511928561,
+            0.03802867369885121
+          ]
+        }
+      }
+    },
+    "HFOpenAI (2023)": {
+      "description": "Third-party score",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.6054436409550046,
+      "auroc_ci95": [
+        0.5535611799816346,
+        0.6536099632690542
+      ],
+      "calibrated_threshold": 0.9819217920303345,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 8,
+          "rate": 0.17391304347826086,
+          "ci95": [
+            0.09085683568889254,
+            0.3072363234392253
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.09890426758938868
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 1,
+          "rate": 0.0136986301369863,
+          "ci95": [
+            0.0024221890927605197,
+            0.0735991326912731
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 16,
+          "rate": 0.5161290322580645,
+          "ci95": [
+            0.34840118286973176,
+            0.6803001396872117
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 39,
+          "rate": 0.2689655172413793,
+          "ci95": [
+            0.2034414774869696,
+            0.3464155517306684
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 3,
+          "rate": 0.020689655172413793,
+          "ci95": [
+            0.007060784343230236,
+            0.05906051507843681
+          ]
+        }
+      },
+      "vendor_threshold": 0.5,
+      "vendor": {
+        "TOEFL essays (non-native writers)": {
+          "n": 91,
+          "flagged": 53,
+          "rate": 0.5824175824175825,
+          "ci95": [
+            0.47976979126386426,
+            0.6783886539753556
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 88,
+          "flagged": 8,
+          "rate": 0.09090909090909091,
+          "ci95": [
+            0.04678586169975407,
+            0.16925567067773065
+          ]
+        },
+        "US college admission essays": {
+          "n": 70,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.05202487486728348
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 145,
+          "flagged": 2,
+          "rate": 0.013793103448275862,
+          "ci95": [
+            0.003790673072295709,
+            0.048893522743927706
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 18,
+          "rate": 0.5806451612903226,
+          "ci95": [
+            0.40765964352020967,
+            0.7358469692645074
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 60,
+          "rate": 0.41379310344827586,
+          "ci95": [
+            0.336862322438135,
+            0.4951738824938194
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 14,
+          "rate": 0.09655172413793103,
+          "ci95": [
+            0.05838671440720313,
+            0.15554272467434394
+          ]
+        }
+      }
+    },
+    "OriginalityAI (2023)": {
+      "description": "Third-party score",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.6353736225895317,
+      "auroc_ci95": [
+        0.5823002754820936,
+        0.6838842975206612
+      ],
+      "calibrated_threshold": 0.99023777246475,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 15,
+          "rate": 0.32608695652173914,
+          "ci95": [
+            0.20865764564493358,
+            0.47032537255672924
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.09890426758938868
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 1,
+          "rate": 0.0136986301369863,
+          "ci95": [
+            0.0024221890927605197,
+            0.0735991326912731
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 6,
+          "rate": 0.1935483870967742,
+          "ci95": [
+            0.09186883586347633,
+            0.36280603555459856
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 33,
+          "rate": 0.22758620689655173,
+          "ci95": [
+            0.16689282461508925,
+            0.302341582969887
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 3,
+          "rate": 0.020689655172413793,
+          "ci95": [
+            0.007060784343230236,
+            0.05906051507843681
+          ]
+        }
+      },
+      "vendor_threshold": 0.5,
+      "vendor": {
+        "TOEFL essays (non-native writers)": {
+          "n": 91,
+          "flagged": 69,
+          "rate": 0.7582417582417582,
+          "ci95": [
+            0.6609799811910234,
+            0.8345831472251989
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 88,
+          "flagged": 1,
+          "rate": 0.011363636363636364,
+          "ci95": [
+            0.00200873360043052,
+            0.06159643007267622
+          ]
+        },
+        "US college admission essays": {
+          "n": 70,
+          "flagged": 3,
+          "rate": 0.04285714285714286,
+          "ci95": [
+            0.014681274851143573,
+            0.11859861074180134
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 145,
+          "flagged": 11,
+          "rate": 0.07586206896551724,
+          "ci95": [
+            0.04288528955313971,
+            0.13073283871207647
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 13,
+          "rate": 0.41935483870967744,
+          "ci95": [
+            0.26415303073549257,
+            0.5923403564797902
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 85,
+          "rate": 0.5862068965517241,
+          "ci95": [
+            0.5048261175061806,
+            0.6631376775618649
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 40,
+          "rate": 0.27586206896551724,
+          "ci95": [
+            0.20961008987731197,
+            0.3536840429457696
+          ]
+        }
+      }
+    },
+    "Quil (2023)": {
+      "description": "Third-party score",
+      "scored": 601,
+      "skipped": 145,
+      "auroc": 0.5990454545454545,
+      "auroc_ci95": [
+        0.5352840909090909,
+        0.6542954545454546
+      ],
+      "calibrated_threshold": 0.9998194575309753,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 8,
+          "rate": 0.17391304347826086,
+          "ci95": [
+            0.09085683568889254,
+            0.3072363234392253
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.09890426758938868
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 12,
+          "rate": 0.08275862068965517,
+          "ci95": [
+            0.047973274980339355,
+            0.13908195689032044
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 2,
+          "rate": 0.013793103448275862,
+          "ci95": [
+            0.003790673072295709,
+            0.048893522743927706
+          ]
+        }
+      },
+      "vendor_threshold": 0.5,
+      "vendor": {
+        "TOEFL essays (non-native writers)": {
+          "n": 91,
+          "flagged": 68,
+          "rate": 0.7472527472527473,
+          "ci95": [
+            0.6492012891565241,
+            0.8252740465611358
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 88,
+          "flagged": 8,
+          "rate": 0.09090909090909091,
+          "ci95": [
+            0.04678586169975407,
+            0.16925567067773065
+          ]
+        },
+        "US college admission essays": {
+          "n": 70,
+          "flagged": 1,
+          "rate": 0.014285714285714285,
+          "ci95": [
+            0.0025261814032348645,
+            0.07658369703926908
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 18,
+          "rate": 0.5806451612903226,
+          "ci95": [
+            0.40765964352020967,
+            0.7358469692645074
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 83,
+          "rate": 0.5724137931034483,
+          "ci95": [
+            0.49104228459906046,
+            0.6500473032580978
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 35,
+          "rate": 0.2413793103448276,
+          "ci95": [
+            0.17898361610507632,
+            0.31712499869078725
+          ]
+        }
+      }
+    },
+    "Sapling (2023)": {
+      "description": "Third-party score",
+      "scored": 601,
+      "skipped": 145,
+      "auroc": 0.5258409090909091,
+      "auroc_ci95": [
+        0.4718636363636364,
+        0.5778181818181818
+      ],
+      "calibrated_threshold": 0.9999994744611321,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 6,
+          "rate": 0.13043478260869565,
+          "ci95": [
+            0.06117757137492025,
+            0.2566613423036133
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 1,
+          "rate": 0.02857142857142857,
+          "ci95": [
+            0.005061361365853362,
+            0.1453340909327131
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 5,
+          "rate": 0.16129032258064516,
+          "ci95": [
+            0.07092519905439934,
+            0.3263470272497887
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 21,
+          "rate": 0.14482758620689656,
+          "ci95": [
+            0.09671747603267106,
+            0.2112716882869815
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 4,
+          "rate": 0.027586206896551724,
+          "ci95": [
+            0.010778728538865683,
+            0.06877967448824501
+          ]
+        }
+      },
+      "vendor_threshold": 0.5,
+      "vendor": {
+        "TOEFL essays (non-native writers)": {
+          "n": 91,
+          "flagged": 62,
+          "rate": 0.6813186813186813,
+          "ci95": [
+            0.5799071714420602,
+            0.7680414080842238
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 88,
+          "flagged": 4,
+          "rate": 0.045454545454545456,
+          "ci95": [
+            0.017815960935119883,
+            0.11111907503986312
+          ]
+        },
+        "US college admission essays": {
+          "n": 70,
+          "flagged": 1,
+          "rate": 0.014285714285714285,
+          "ci95": [
+            0.0025261814032348645,
+            0.07658369703926908
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 23,
+          "rate": 0.7419354838709677,
+          "ci95": [
+            0.5675352757228489,
+            0.8629845626313024
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 98,
+          "rate": 0.6758620689655173,
+          "ci95": [
+            0.5959913905453222,
+            0.7466547513934905
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 26,
+          "rate": 0.1793103448275862,
+          "ci95": [
+            0.1254048780843173,
+            0.24976980426255344
+          ]
+        }
+      }
+    },
+    "ZeroGPT (2023)": {
+      "description": "Third-party score",
+      "scored": 746,
+      "skipped": 0,
+      "auroc": 0.5531666092745638,
+      "auroc_ci95": [
+        0.5096060032139578,
+        0.5938145661157025
+      ],
+      "calibrated_threshold": 0.75,
+      "calibrated": {
+        "TOEFL essays (non-native writers)": {
+          "n": 46,
+          "flagged": 10,
+          "rate": 0.21739130434782608,
+          "ci95": [
+            0.12260774618580751,
+            0.35573965839189464
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 44,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            6.938893903907228e-18,
+            0.08029831778201396
+          ]
+        },
+        "US college admission essays": {
+          "n": 35,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.09890426758938868
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 73,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.04999375338358389
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 30,
+          "rate": 0.967741935483871,
+          "ci95": [
+            0.8380554282383037,
+            0.9942829259130554
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 36,
+          "rate": 0.2482758620689655,
+          "ci95": [
+            0.18506448724327232,
+            0.32448123115803484
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.11025900073475385
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.02580998860533614
+          ]
+        }
+      },
+      "vendor_threshold": 0.5,
+      "vendor": {
+        "TOEFL essays (non-native writers)": {
+          "n": 91,
+          "flagged": 44,
+          "rate": 0.4835164835164835,
+          "ci95": [
+            0.3836068307058106,
+            0.5847614802463456
+          ]
+        },
+        "US 8th-grade essays": {
+          "n": 88,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            3.469446951953614e-18,
+            0.04182853957248131
+          ]
+        },
+        "US college admission essays": {
+          "n": 70,
+          "flagged": 2,
+          "rate": 0.02857142857142857,
+          "ci95": [
+            0.007870446893806289,
+            0.09832443512391814
+          ]
+        },
+        "Stanford CS224N abstracts": {
+          "n": 145,
+          "flagged": 0,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.02580998860533614
+          ]
+        },
+        "GPT-3.5 college essays": {
+          "n": 31,
+          "flagged": 31,
+          "rate": 1.0,
+          "ci95": [
+            0.889740999265246,
+            0.9999999999999999
+          ]
+        },
+        "GPT-3.5 CS224N abstracts": {
+          "n": 145,
+          "flagged": 45,
+          "rate": 0.3103448275862069,
+          "ci95": [
+            0.24075427987389952,
+            0.38972537097640036
+          ]
+        },
+        "GPT-3.5 college essays, literary prompt": {
+          "n": 31,
+          "flagged": 3,
+          "rate": 0.0967741935483871,
+          "ci95": [
+            0.03346403609464399,
+            0.2490028999817704
+          ]
+        },
+        "GPT-3.5 CS224N abstracts, literary prompt": {
+          "n": 145,
+          "flagged": 2,
+          "rate": 0.013793103448275862,
+          "ci95": [
+            0.003790673072295709,
+            0.048893522743927706
+          ]
+        }
+      }
+    }
+  }
+}

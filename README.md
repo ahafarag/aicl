@@ -69,6 +69,27 @@ r["sentence_length"]["cv"], r["lexical"]["mtld"], r["stock_phrases"]["per_1k_wor
 
 Full definitions, formulas, and caveats: [docs/measurement_model.md](docs/measurement_model.md).
 
+## Detector report card
+
+`aicl bench` measures how often AI-text detectors flag *human* writing, broken down by who wrote it. Every detector is calibrated the same way and reported with confidence intervals.
+
+```bash
+aicl bench liang                     # Liang et al. (2023) essays + recorded 2023 commercial detector scores
+aicl bench raid --attacks paraphrase,synonym   # stratified RAID sample, per-model and per-attack rows
+aicl bench my_data.jsonl             # your own labelled data
+```
+
+### First results: Liang et al. (2023) essays
+
+[Full report](reports/liang/report.md) · [protocol](docs/report_card.md) · 746 texts, 12 detectors
+
+1. **At their own 0.5 cut-off, the 2023 commercial detectors flagged 48–76% of human-written TOEFL essays as AI**, compared with 0–12% of US 8th-grade essays. The mean across the seven is 61.2%, which reproduces the paper's figure.
+2. **Calibration narrows the gap but doesn't close it.** With every detector tuned to flag at most 5% of a held-out pool of human writing, TOEFL essays were still flagged at 11–35% by every detector except the stock-phrase heuristic (0%), against 0–6% for the US essay groups. The most-flagged were GPTZero (35%), Originality.ai (33%) and GLTR (30%).
+3. **One prompt defeats almost everything.** GPT-3.5 college essays generated with "use literary language" were detected 0–10% of the time by every model-based detector. The only exception was the crude stock-phrase heuristic (58%), because that prompt produces exactly the vocabulary it counts.
+4. **The best separator was the simplest one.** Low sentence-length variation reached AUROC 0.86 (0.82–0.89), ahead of every commercial and model-based detector (0.53–0.73). This reflects 2023-era GPT-3.5 output on short essays. Don't generalise it to current models before the RAID run is done.
+
+Every group has 31–145 texts, so read the intervals in the report before comparing detectors.
+
 ## Principles
 
 1. **Descriptive, not a verdict.** No number here proves authorship. Detectors misclassify human writing, especially by non-native English writers ([Liang et al., 2023](https://doi.org/10.1016/j.patter.2023.100779)).
@@ -78,7 +99,9 @@ Full definitions, formulas, and caveats: [docs/measurement_model.md](docs/measur
 
 ## Roadmap
 
-- [ ] **Detector report card:** run open and commercial detectors over public benchmarks (e.g. RAID) and human-written corpora; publish false-positive rates, calibration, and robustness to light editing.
+- [x] Detector report card on Liang et al. (2023): per-group false-positive rates for open and 2023 commercial detectors.
+- [ ] Report card on a RAID sample: per-generator and per-attack detection rates.
+- [ ] Stronger open detectors (Binoculars with Falcon-7B, Fast-DetectGPT) on GPU.
 - [ ] Reference profiles: per-genre distributions so a value can be read as a percentile against human-written text of the same kind.
 - [ ] HTML report with a GLTR-style per-token surprisal heatmap.
 - [ ] Web demo (Hugging Face Space).
