@@ -20,8 +20,8 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/ahafarag/ai-content-lab"
-Issues = "https://github.com/ahafarag/ai-content-lab/issues"
+Homepage = "https://github.com/ahafarag/aicl"
+Issues = "https://github.com/ahafarag/aicl/issues"
 
 [project.optional-dependencies]
 lm = ["torch>=2.1", "transformers>=4.40"]

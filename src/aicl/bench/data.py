@@ -26,7 +26,14 @@ from pathlib import Path
 CACHE = Path(os.environ.get("AICL_CACHE", Path.home() / ".cache" / "aicl"))
 
 
-def _fetch_json(url: str, cache_name: str | None = None, retries: int = 6):
+def _backoff(attempt: int) -> None:
+    time.sleep(min(60, 3 * 2 ** attempt))
+
+
+def _fetch_json(url: str, cache_name: str | None = None, retries: int = 10):
+    """GET JSON with caching. The Hugging Face datasets server intermittently
+    rejects valid queries (422, 502, "index is loading"), so everything except a
+    404 is retried with capped exponential backoff, about six minutes in total."""
     path = CACHE / cache_name if cache_name else None
     if path and path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
@@ -39,18 +46,17 @@ def _fetch_json(url: str, cache_name: str | None = None, retries: int = 6):
                 return None
             if attempt == retries - 1:
                 raise
-            time.sleep(2 ** attempt)
+            _backoff(attempt)
             continue
         except OSError:
             if attempt == retries - 1:
                 raise
-            time.sleep(2 ** attempt)
+            _backoff(attempt)
             continue
         if isinstance(data, dict) and "error" in data:
-            # The Hugging Face datasets server answers "index is loading" while warming up.
             if attempt == retries - 1:
                 raise RuntimeError(f"{url}: {data['error']}")
-            time.sleep(2 ** attempt * 5)
+            _backoff(attempt)
             continue
         if path:
             path.parent.mkdir(parents=True, exist_ok=True)
