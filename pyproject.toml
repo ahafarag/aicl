@@ -33,5 +33,8 @@ aicl = "aicl.cli:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+"aicl.data" = ["*.json"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

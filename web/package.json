@@ -1,0 +1,11 @@
+{
+  "name": "aicl-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node test/parity.mjs"
+  },
+  "devDependencies": {
+    "@huggingface/transformers": "4.3.1"
+  }
+}

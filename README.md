@@ -1,6 +1,12 @@
-# ai-content-lab
+# aicl: what AI detectors actually measure
 
 **Open, reproducible measurement of prose style, for editors, researchers, and anyone who wants to check what AI detectors are actually measuring.**
+
+In a 2023 Stanford study, seven AI detectors flagged on average **61% of essays by non-native English writers** as AI-generated. This repo reproduces that result, measures open detectors the same way, and shows *why* it happens.
+
+### [▶ Try it in your browser: would a detector flag your writing?](https://huggingface.co/spaces/abdufarag/ai-detector-check)
+
+Paste a text. Three open detectors score it, each signal is placed among real human and GPT essays, and a word-by-word heatmap shows what looks "predictable". Everything runs locally in your browser with transformers.js, so **your text never leaves your device**. Source: [web/](web/).
 
 Commercial AI detectors return one opaque percentage. `aicl` returns the measurements underneath (sentence-length variation, lexical diversity, repetition, stock-phrase density, perplexity, GLTR rank profiles, Binoculars scores), each with a written definition, a citation, and its known limits.
 
@@ -103,8 +109,7 @@ Every group has 31–145 texts, so read the intervals in the report before compa
 - [ ] Report card on a RAID sample: per-generator and per-attack detection rates.
 - [ ] Stronger open detectors (Binoculars with Falcon-7B, Fast-DetectGPT) on GPU.
 - [ ] Reference profiles: per-genre distributions so a value can be read as a percentile against human-written text of the same kind.
-- [ ] HTML report with a GLTR-style per-token surprisal heatmap.
-- [ ] Web demo (Hugging Face Space).
+- [x] In-browser demo with a GLTR-style word heatmap (Hugging Face Space, runs on transformers.js).
 - [ ] Better sentence segmentation for non-English text.
 
 Contributions are welcome, especially stock-phrase entries backed by a corpus comparison and new measures with a citation.

@@ -1,0 +1,13 @@
+Code review catches bugs, but that is the smaller part of its value. The bigger part is that two people now understand each change instead of one, which matters the day the author is on holiday and the change breaks in production.
+
+Defects found in review are cheaper to fix than defects found by users. Reviewers also learn parts of the codebase they would otherwise never open. Over time this spreads ownership: when everyone has read the payment module, nobody is the single person who can fix it.
+
+There is a cost. A review that sits for two days blocks the author and invites large, rushed merges. So speed matters as much as thoroughness.
+
+Keep changes small. A 50-line diff gets a careful read; a 2,000-line diff gets "LGTM".
+
+Say what you would change and why. "This loop allocates on every iteration; can we hoist the buffer?" is useful. "Not great" is not.
+
+Authors should explain the intent in the description, including what they chose not to do. Leave formatting and lint to automated tools so humans can argue about design.
+
+Review is how a team keeps its code understandable to more than one person. Make the diffs small, the comments specific and the turnaround fast.
