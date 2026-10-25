@@ -32,7 +32,7 @@ pip install "ai-content-lab[lm]"      # + perplexity, GLTR, Binoculars (torch, t
 From source:
 
 ```bash
-git clone https://github.com/<you>/ai-content-lab && cd ai-content-lab
+git clone https://github.com/ahafarag/ai-content-lab && cd ai-content-lab
 pip install -e ".[dev,lm]" && pytest
 ```
 
@@ -116,7 +116,7 @@ Contributions are welcome, especially stock-phrase entries backed by a corpus co
   title  = {ai-content-lab: reproducible stylometric measurement for prose},
   author = {Abdelrahman},
   year   = {2026},
-  url    = {https://github.com/<you>/ai-content-lab}
+  url    = {https://github.com/ahafarag/ai-content-lab}
 }
 ```
 

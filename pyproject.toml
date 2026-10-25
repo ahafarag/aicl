@@ -19,6 +19,10 @@ classifiers = [
 ]
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/ahafarag/ai-content-lab"
+Issues = "https://github.com/ahafarag/ai-content-lab/issues"
+
 [project.optional-dependencies]
 lm = ["torch>=2.1", "transformers>=4.40"]
 dev = ["pytest>=8"]
