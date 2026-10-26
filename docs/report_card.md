@@ -5,9 +5,9 @@
 ## Reproduce
 
 ```bash
-pip install -e ".[lm]"
+pip install -e ".[lm,bench]"
 aicl bench liang --out reports/liang
-aicl bench raid --n 20 --attacks paraphrase,synonym,homoglyph --out reports/raid
+aicl bench raid --n 20 --domains abstracts,books,news --attacks paraphrase,synonym,homoglyph,whitespace --out reports/raid
 aicl bench my_data.jsonl            # {"text": ..., "label": 0|1, "group": ...} per line
 ```
 
@@ -18,7 +18,7 @@ Data downloads on first use to `~/.cache/aicl` (override with `AICL_CACHE`), and
 | Name | Contents | Source |
 |---|---|---|
 | `liang` | 91 TOEFL essays by non-native English writers; 88 US 8th-grade essays; 70 US college admission essays; 145 Stanford CS224N abstracts; 352 GPT-3.5 texts (half generated with a "use literary language" prompt). Also includes the scores seven commercial detectors gave each text in 2023. | Liang et al. (2023), MIT |
-| `raid` | Stratified sample of RAID's train split: human texts per domain, unattacked generations per model, and attacked generations per attack. | Dugan et al. (2024), MIT |
+| `raid` | Stratified sample of RAID's train split: human texts per domain, unattacked generations per model, and attacked generations per attack (drawn evenly across models). Read from the Hugging Face Parquet export, which covers 2.27M of the split's rows and only the abstracts, books, news and (partly) poetry domains. The first run builds a label index (about 4 minutes) and then downloads only the row groups it samples. | Dugan et al. (2024), MIT |
 | JSONL | Your own labelled data. | - |
 
 The 2023 commercial scores are a **historical snapshot**. Vendors have since changed their models, so these numbers describe what users saw at the time, not the products today. To evaluate a current service, score the texts with it, where its terms allow, and supply the scores in a JSONL `scores` field.

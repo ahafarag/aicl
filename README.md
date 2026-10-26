@@ -92,9 +92,19 @@ aicl bench my_data.jsonl             # your own labelled data
 1. **At their own 0.5 cut-off, the 2023 commercial detectors flagged 48–76% of human-written TOEFL essays as AI**, compared with 0–12% of US 8th-grade essays. The mean across the seven is 61.2%, which reproduces the paper's figure.
 2. **Calibration narrows the gap but doesn't close it.** With every detector tuned to flag at most 5% of a held-out pool of human writing, TOEFL essays were still flagged at 11–35% by every detector except the stock-phrase heuristic (0%), against 0–6% for the US essay groups. The most-flagged were GPTZero (35%), Originality.ai (33%) and GLTR (30%).
 3. **One prompt defeats almost everything.** GPT-3.5 college essays generated with "use literary language" were detected 0–10% of the time by every model-based detector. The only exception was the crude stock-phrase heuristic (58%), because that prompt produces exactly the vocabulary it counts.
-4. **The best separator was the simplest one.** Low sentence-length variation reached AUROC 0.86 (0.82–0.89), ahead of every commercial and model-based detector (0.53–0.73). This reflects 2023-era GPT-3.5 output on short essays. Don't generalise it to current models before the RAID run is done.
+4. **The best separator was the simplest one.** Low sentence-length variation reached AUROC 0.86 (0.82–0.89), ahead of every commercial and model-based detector (0.53–0.73). This reflects 2023-era GPT-3.5 output on short essays, and the RAID results below show it doesn't generalise.
 
 Every group has 31–145 texts, so read the intervals in the report before comparing detectors.
+
+### Second results: RAID, 11 generators and 4 attacks
+
+[Full report](reports/raid/report.md) · 984 texts from RAID's abstracts, books and news domains · thresholds calibrated to 5% false positives on held-out human texts
+
+1. **Rankings flip between datasets.** Binoculars was the strongest detector here (AUROC 0.86) but only 5th of 12 on the Liang essays (0.68). Sentence-length variation fell from 0.86 to 0.69, and stock phrases dropped to chance (0.51). A detector's accuracy on one benchmark tells you little about the next.
+2. **Detection depends on which model wrote the text.** Binoculars caught 93–97% of GPT-3, ChatGPT and Llama-chat text but only 65% of GPT-4 and 47% of MPT. Over all 11 unattacked generators: Binoculars 77%, perplexity 68%, GLTR 58%.
+3. **Simple edits defeat the simple detectors.** Synonym swaps cut perplexity's detection rate from 68% to 29% and GLTR's from 58% to 21%. Paraphrasing and look-alike characters cut perplexity's rate to 39–44%, but not Binoculars' (92–98%). Synonym swaps and whitespace edits brought Binoculars down to 47–56%.
+
+There were only 30 evaluation human texts, so false-positive rates here have wide intervals (up to 0–40%) and aren't a basis for comparison. Use the Liang results for false positives. The Hugging Face Parquet export of RAID covers only part of the dataset, so the books, news and abstracts domains stand in for all eight.
 
 ## Principles
 
@@ -106,7 +116,8 @@ Every group has 31–145 texts, so read the intervals in the report before compa
 ## Roadmap
 
 - [x] Detector report card on Liang et al. (2023): per-group false-positive rates for open and 2023 commercial detectors.
-- [ ] Report card on a RAID sample: per-generator and per-attack detection rates.
+- [x] Report card on a RAID sample: per-generator and per-attack detection rates.
+- [ ] Larger RAID human sample, so false-positive rates by domain have useful intervals.
 - [ ] Stronger open detectors (Binoculars with Falcon-7B, Fast-DetectGPT) on GPU.
 - [ ] Reference profiles: per-genre distributions so a value can be read as a percentile against human-written text of the same kind.
 - [x] In-browser demo with a GLTR-style word heatmap (Hugging Face Space, runs on transformers.js).

@@ -25,6 +25,7 @@ Issues = "https://github.com/ahafarag/aicl/issues"
 
 [project.optional-dependencies]
 lm = ["torch>=2.1", "transformers>=4.40"]
+bench = ["pyarrow>=14", "huggingface_hub>=0.23"]
 dev = ["pytest>=8"]
 
 [project.scripts]

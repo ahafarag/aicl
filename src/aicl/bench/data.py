@@ -13,7 +13,6 @@ never redistributed with this package.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import random
@@ -110,7 +109,7 @@ def liang() -> list[dict]:
 
 # --- RAID (Dugan et al., 2024) ---
 
-RAID_ROWS = "https://datasets-server.huggingface.co/filter"
+RAID_PARQUET = "datasets/liamdugan/raid@refs%2Fconvert%2Fparquet/raid/partial-train"
 RAID_CITATION = (
     "Dugan, L., et al. (2024). RAID: A shared benchmark for robust evaluation of "
     "machine-generated text detectors. ACL. Data: https://huggingface.co/datasets/liamdugan/raid (MIT)."
@@ -120,21 +119,86 @@ RAID_MODELS = ["gpt2", "gpt3", "chatgpt", "gpt4", "cohere", "cohere-chat", "llam
 RAID_DOMAINS = ["abstracts", "books", "news", "poetry", "recipes", "reddit", "reviews", "wiki"]
 
 
-def _raid_stratum(where: str, n: int, rng: random.Random, chunk: int = 5) -> list[dict]:
-    q = lambda offset, length: RAID_ROWS + "?" + urllib.parse.urlencode({  # noqa: E731
-        "dataset": "liamdugan/raid", "config": "raid", "split": "train",
-        "where": where, "offset": offset, "length": length})
-    key = hashlib.sha1(where.encode()).hexdigest()[:16]
-    total = _fetch_json(q(0, 1), f"raid/count-{key}.json")["num_rows_total"]
-    rows: dict[str, dict] = {}
-    for _ in range(max(1, n // chunk) * 3):
-        if len(rows) >= n or total == 0:
+def _raid_files():
+    try:
+        import pyarrow.parquet as pq
+        from huggingface_hub import HfFileSystem
+    except ImportError as exc:  # pragma: no cover - depends on environment
+        raise ImportError('RAID needs pyarrow and huggingface_hub: pip install "ai-content-lab[bench]"') from exc
+    fs = HfFileSystem()
+    return fs, pq, sorted(fs.glob(f"{RAID_PARQUET}/*.parquet"))
+
+
+def _raid_index() -> dict[tuple[str, str, str], list[tuple[int, int, int]]]:
+    """Map (model, attack, domain) -> [(file, row group, row within group)].
+
+    Built once from the three label columns of RAID's Parquet export (about
+    3 minutes) and cached; the generation texts are not downloaded here.
+    """
+    path = CACHE / "raid" / "index.json"
+    if path.exists():
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        return {tuple(k.split("|")): [tuple(x) for x in v] for k, v in raw.items()}
+    fs, pq, files = _raid_files()
+    index: dict[tuple[str, str, str], list[tuple[int, int, int]]] = {}
+    for fi, name in enumerate(files):
+        pf = pq.ParquetFile(fs.open(name, "rb"))
+        for rg in range(pf.metadata.num_row_groups):
+            t = pf.read_row_group(rg, columns=["model", "attack", "domain"]).to_pydict()
+            for i, key in enumerate(zip(t["model"], t["attack"], t["domain"])):
+                index.setdefault(key, []).append((fi, rg, i))
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({"|".join(k): v for k, v in index.items()}), encoding="utf-8")
+    return index
+
+
+def _raid_pick(rows: list[tuple[int, int, int]], n: int, rng: random.Random, chunk: int = 5):
+    """Pick n rows in runs of up to `chunk` from randomly chosen row groups, so a
+    stratum costs about n / chunk row-group downloads instead of n."""
+    by_group: dict[tuple[int, int], list[int]] = {}
+    for fi, rg, i in rows:
+        by_group.setdefault((fi, rg), []).append(i)
+    groups = list(by_group)
+    rng.shuffle(groups)
+    picked = []
+    for g in groups:
+        if len(picked) >= n:
             break
-        offset = rng.randrange(max(1, total - chunk))
-        page = _fetch_json(q(offset, chunk), f"raid/rows-{key}-{offset}-{chunk}.json")
-        for r in page["rows"]:
-            rows.setdefault(r["row"]["id"], r["row"])
-    return list(rows.values())[:n]
+        members = by_group[g]
+        start = rng.randrange(max(1, len(members) - chunk + 1))
+        picked += [(*g, i) for i in members[start : start + min(chunk, n - len(picked))]]
+    return picked
+
+
+def _raid_fetch(picks: list[tuple[int, int, int]]) -> dict[tuple[int, int, int], dict]:
+    """Download the chosen rows, reading each needed row group once (cached on disk)."""
+    cache = CACHE / "raid" / "rows"
+    out, todo = {}, {}
+    for fi, rg, i in picks:
+        f = cache / f"{fi}-{rg}-{i}.json"
+        if f.exists():
+            out[(fi, rg, i)] = json.loads(f.read_text(encoding="utf-8"))
+        else:
+            todo.setdefault((fi, rg), []).append(i)
+    if todo:
+        fs, pq, files = _raid_files()
+        cache.mkdir(parents=True, exist_ok=True)
+        handles: dict[int, object] = {}
+        cols = ["id", "model", "domain", "attack", "decoding", "generation"]
+        for (fi, rg), rows in sorted(todo.items()):
+            if fi not in handles:
+                handles[fi] = pq.ParquetFile(fs.open(files[fi], "rb"))
+            t = handles[fi].read_row_group(rg, columns=cols).to_pydict()
+            for i in rows:
+                row = {c: t[c][i] for c in cols}
+                (cache / f"{fi}-{rg}-{i}.json").write_text(json.dumps(row), encoding="utf-8")
+                out[(fi, rg, i)] = row
+    return out
+
+
+def raid_domains() -> list[str]:
+    """Domains present in the Parquet export (which covers only part of RAID's train split)."""
+    return sorted({d for (_, _, d) in _raid_index()})
 
 
 def raid(
@@ -149,31 +213,37 @@ def raid(
     (pooled over models) x domain. Attacked texts are reported per attack, so
     robustness can be read directly from the report."""
     rng = random.Random(seed)
-    domains = domains or ["abstracts", "news", "reddit", "reviews"]
+    index = _raid_index()
+    available = {d for (_, _, d) in index}
+    domains = domains or sorted(available)
+    missing = [d for d in domains if d not in available]
+    if missing:
+        raise ValueError(f"RAID Parquet export has no domain(s) {missing}; available: {sorted(available)}")
     models = models or RAID_MODELS
     attacks = attacks or []
-    records = []
 
-    def add(rows: list[dict], label: int, group: str) -> None:
-        for r in rows:
+    # (label, group, picks) per stratum; attacked texts are drawn evenly across
+    # generator models and pooled per attack.
+    strata = []
+    per_model = max(1, -(-n // len(models)))
+    for domain in domains:
+        strata.append((0, f"human: {domain}", _raid_pick(index.get(("human", "none", domain), []), n, rng)))
+        for model in models:
+            strata.append((1, f"model: {model}", _raid_pick(index.get((model, "none", domain), []), n, rng)))
+        for attack in attacks:
+            for model in models:
+                strata.append((1, f"attack: {attack}",
+                               _raid_pick(index.get((model, attack, domain), []), per_model, rng)))
+
+    rows = _raid_fetch([p for _, _, picks in strata for p in picks])
+    records = []
+    for label, group, picks in strata:
+        for p in picks:
+            r = rows[p]
             text = (r.get("generation") or "").strip()
             if text:
                 records.append({"id": r["id"], "text": text, "label": label, "group": group,
                                 "meta": {k: r.get(k) for k in ("model", "domain", "attack", "decoding")}})
-
-    for domain in domains:
-        add(_raid_stratum(f"\"model\"='human' AND \"attack\"='none' AND \"domain\"='{domain}'", n, rng),
-            0, f"human: {domain}")
-        for model in models:
-            where = f"\"model\"='{model}' AND \"attack\"='none' AND \"domain\"='{domain}'"
-            add(_raid_stratum(where, n, rng), 1, f"model: {model}")
-        # The filter API has no reliable negation, so attacked texts are drawn
-        # evenly across generator models and pooled per attack.
-        per_model = max(1, -(-n // len(models)))
-        for attack in attacks:
-            for model in models:
-                where = f"\"model\"='{model}' AND \"attack\"='{attack}' AND \"domain\"='{domain}'"
-                add(_raid_stratum(where, per_model, rng), 1, f"attack: {attack}")
     return records
 
 

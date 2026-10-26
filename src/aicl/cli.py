@@ -100,7 +100,7 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--fpr", type=float, default=0.05, help="target false-positive rate for calibration")
     b.add_argument("--seed", type=int, default=0)
     b.add_argument("--n", type=int, default=20, help="RAID: texts per stratum")
-    b.add_argument("--domains", help="RAID: comma-separated domains")
+    b.add_argument("--domains", help="RAID: comma-separated domains (default: all in the Parquet export)")
     b.add_argument("--models", help="RAID: comma-separated generator models")
     b.add_argument("--attacks", default="", help="RAID: comma-separated adversarial attacks to include")
     b.add_argument("--out", help="output directory (default: reports/<dataset>)")

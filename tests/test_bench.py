@@ -48,3 +48,17 @@ def test_evaluate_reports_group_false_positives():
     md = markdown(report, "toy", ["synthetic"])
     assert "non-native | human → false positives" in md
     json.dumps(report)
+
+
+def test_raid_pick_takes_runs_from_row_groups():
+    import random
+
+    from aicl.bench.data import _raid_pick
+
+    rows = [(0, rg, i) for rg in range(10) for i in range(0, 20, 2)]
+    picks = _raid_pick(rows, 12, random.Random(0), chunk=5)
+    assert len(picks) == 12 and len(set(picks)) == 12
+    assert set(picks) <= set(rows)
+    assert len({(f, rg) for f, rg, _ in picks}) == 3  # 5 + 5 + 2
+    assert _raid_pick(rows, 12, random.Random(0), chunk=5) == picks
+    assert _raid_pick([], 5, random.Random(0)) == []
