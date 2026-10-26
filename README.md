@@ -6,7 +6,7 @@ In a 2023 Stanford study, seven AI detectors flagged on average **61% of essays 
 
 ### [▶ Try it in your browser: would a detector flag your writing?](https://huggingface.co/spaces/abdufarag/ai-detector-check)
 
-Paste a text. Three open detectors score it, each signal is placed among real human and GPT essays, and a word-by-word heatmap shows what looks "predictable". Everything runs locally in your browser with transformers.js, so **your text never leaves your device**. Source: [web/](web/).
+Paste a text or upload a file (PDF, Word, OpenDocument, PowerPoint, Excel, CSV, HTML, RTF or plain text). Three open detectors score it, each signal is placed among real human and GPT essays, and a word-by-word heatmap shows what looks "predictable". Everything, including reading uploaded files, runs locally in your browser with transformers.js, so **your text never leaves your device**. Source: [web/](web/).
 
 Commercial AI detectors return one opaque percentage. `aicl` returns the measurements underneath (sentence-length variation, lexical diversity, repetition, stock-phrase density, perplexity, GLTR rank profiles, Binoculars scores), each with a written definition, a citation, and its known limits.
 

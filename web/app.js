@@ -1,4 +1,5 @@
 import { analyze, WORD_RE } from "./aicl.js";
+import { ACCEPT, extractText } from "./extract.js";
 
 const REPO = "https://github.com/ahafarag/aicl";
 const MIN_WORDS = 40, MAX_WORDS = 600;
@@ -155,6 +156,40 @@ async function run() {
 }
 
 $("go").addEventListener("click", run);
+
+const FILE_HELP = $("file-note").textContent;
+async function loadFile(file) {
+  const note = $("file-note");
+  note.classList.remove("error");
+  note.textContent = `Reading ${file.name}…`;
+  try {
+    const { text, kind } = await extractText(file);
+    $("text").value = text;
+    const n = (text.match(WORD_RE) || []).length;
+    note.textContent = `Loaded ${n.toLocaleString()} words from ${file.name} (${kind}). Check the text above, then press Analyse.` +
+      (n > MAX_WORDS ? ` Only the first ${MAX_WORDS} words will be analysed.` : "");
+  } catch (e) {
+    note.classList.add("error");
+    note.textContent = `Couldn't read ${file.name}: ${e.message}`;
+  }
+}
+$("file").accept = ACCEPT;
+$("file").addEventListener("change", (e) => {
+  if (e.target.files[0]) loadFile(e.target.files[0]);
+  e.target.value = "";
+});
+const box = $("text");
+box.addEventListener("dragover", (e) => {
+  if (e.dataTransfer.types.includes("Files")) { e.preventDefault(); box.classList.add("dragging"); }
+});
+box.addEventListener("dragleave", () => box.classList.remove("dragging"));
+box.addEventListener("drop", (e) => {
+  box.classList.remove("dragging");
+  if (e.dataTransfer.files[0]) { e.preventDefault(); loadFile(e.dataTransfer.files[0]); }
+});
+box.addEventListener("input", () => {
+  if ($("file-note").textContent !== FILE_HELP) { $("file-note").textContent = FILE_HELP; $("file-note").classList.remove("error"); }
+});
 for (const [path, label, sub] of EXAMPLES) {
   const b = document.createElement("button");
   b.className = "example";

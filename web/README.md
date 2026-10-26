@@ -12,7 +12,7 @@ short_description: See what AI detectors react to. Runs in your browser.
 
 # Would an AI detector flag your writing?
 
-Paste a text to see:
+Paste a text, or upload a PDF, Word (.docx), OpenDocument (.odt), PowerPoint (.pptx), Excel (.xlsx), CSV, HTML, RTF or text file, to see:
 
 - **Three open detectors** (Binoculars, perplexity, GLTR), each calibrated to wrongly flag at most 5% of a pool of human essays, and whether they would flag yours.
 - **Where your text sits** among real human essays (TOEFL essays by non-native writers, US 8th-grade essays) and GPT-3.5 essays, for six signals.

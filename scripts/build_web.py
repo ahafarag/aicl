@@ -8,7 +8,7 @@ from pathlib import Path
 
 WEB = Path("web")
 DIST = WEB / "dist"
-FILES = ["index.html", "app.js", "aicl.js", "lm.js", "worker.js", "README.md"]
+FILES = ["index.html", "app.js", "aicl.js", "extract.js", "lm.js", "worker.js", "README.md"]
 
 
 def main() -> None:
